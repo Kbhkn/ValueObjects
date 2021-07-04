@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Vkn</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.kbhkn.valueobjects.vo</a>
+</div>
+
+<h1>Coverage Summary for Class: Vkn (com.kbhkn.valueobjects.vo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Vkn</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.kbhkn.valueobjects.vo;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.kbhkn.valueobjects.base.Maskable;
+<i class="no-highlight">4</i>&nbsp;import com.kbhkn.valueobjects.base.ValueObject;
+<i class="no-highlight">5</i>&nbsp;import lombok.Value;
+<i class="no-highlight">6</i>&nbsp;import lombok.experimental.Accessors;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import java.util.Objects;
+<i class="no-highlight">9</i>&nbsp;import java.util.regex.Pattern;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;/**
+<i class="no-highlight">12</i>&nbsp; * VKN is a value object.
+<i class="no-highlight">13</i>&nbsp; * It should be immutable(@Value) and validated while object creation.
+<i class="no-highlight">14</i>&nbsp; * It can be sure that this object contains a validated vkn value.
+<i class="no-highlight">15</i>&nbsp; * Don&#39;t need anymore to validate this object at any layer while we&#39;re using it.
+<i class="no-highlight">16</i>&nbsp; *
+<i class="no-highlight">17</i>&nbsp; * @author Hakan KABASAKAL, 4-July-21
+<i class="no-highlight">18</i>&nbsp; */
+<b class="fc"><i class="no-highlight">19</i>&nbsp;@Value</b>
+<i class="no-highlight">20</i>&nbsp;@Accessors(fluent = true)
+<i class="no-highlight">21</i>&nbsp;public class Vkn implements ValueObject&lt;Vkn&gt;, Maskable {
+<i class="no-highlight">22</i>&nbsp;    private static final String VALID_BUT_TEST_VKN = &quot;1234567890&quot;;
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    private static final Pattern VKN_PATTERN = Pattern.compile(&quot;^\\d{10}$&quot;);</b>
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    String value;</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;    /**
+<i class="no-highlight">28</i>&nbsp;     * Creator for the value object.
+<i class="no-highlight">29</i>&nbsp;     *
+<i class="no-highlight">30</i>&nbsp;     * @param value input value.
+<i class="no-highlight">31</i>&nbsp;     * @return validated VKN value object.
+<i class="no-highlight">32</i>&nbsp;     */
+<i class="no-highlight">33</i>&nbsp;    public static Vkn of(String value) {
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        Objects.requireNonNull(value, &quot;VKN cannot be empty!&quot;);</b>
+<i class="no-highlight">35</i>&nbsp;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        var vkn = value.trim();</b>
+<i class="no-highlight">37</i>&nbsp;
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        if (isValid(vkn)) {</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            return new Vkn(vkn);</b>
+<i class="no-highlight">40</i>&nbsp;        }
+<i class="no-highlight">41</i>&nbsp;
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        throw new IllegalArgumentException(&quot;An invalid VKN: &quot; + value);</b>
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    /**
+<i class="no-highlight">46</i>&nbsp;     * Checks value with T.R TAX-ID Verification Algorithm.
+<i class="no-highlight">47</i>&nbsp;     *
+<i class="no-highlight">48</i>&nbsp;     * @param value VKN value.
+<i class="no-highlight">49</i>&nbsp;     * @return validation result.
+<i class="no-highlight">50</i>&nbsp;     */
+<i class="no-highlight">51</i>&nbsp;    private static boolean isValid(String value) {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        if (!VKN_PATTERN.matcher(value).matches() || value.equals(VALID_BUT_TEST_VKN)) {</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            return false;</b>
+<i class="no-highlight">54</i>&nbsp;        }
+<i class="no-highlight">55</i>&nbsp;
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        var tmp = 0;</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        var sum = 0;</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;        var lastDigit = Character.getNumericValue(value.charAt(9));</b>
+<i class="no-highlight">59</i>&nbsp;
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        for (var i = 0; i &lt; 9; i++) {</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;            var digit = Character.getNumericValue(value.charAt(i));</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            tmp = Math.floorMod(digit + 10 - (i + 1), 10);</b>
+<i class="no-highlight">63</i>&nbsp;
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            if (tmp == 9) {</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;                sum += tmp;</b>
+<i class="no-highlight">66</i>&nbsp;            } else {
+<b class="fc"><i class="no-highlight">67</i>&nbsp;                sum = (int) (sum + ((tmp * (Math.pow(2, 10 - (i + 1)))) % 9));</b>
+<i class="no-highlight">68</i>&nbsp;            }
+<i class="no-highlight">69</i>&nbsp;        }
+<i class="no-highlight">70</i>&nbsp;
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        return lastDigit == Math.floorMod(10 - Math.floorMod(sum, 10), 10);</b>
+<i class="no-highlight">72</i>&nbsp;    }
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;    /**
+<i class="no-highlight">75</i>&nbsp;     * Returns value as a long.
+<i class="no-highlight">76</i>&nbsp;     */
+<i class="no-highlight">77</i>&nbsp;    public Long asLong() {
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        return Long.parseLong(value);</b>
+<i class="no-highlight">79</i>&nbsp;    }
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    @Override
+<i class="no-highlight">82</i>&nbsp;    public String masked() {
+<i class="no-highlight">83</i>&nbsp;        // Show the first 3 and last 1 character
+<i class="no-highlight">84</i>&nbsp;        // Example output: 1234567890 --&gt; 123******0
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        return value.substring(0, 3) + &quot;*&quot;.repeat(6) + value.substring(9);</b>
+<i class="no-highlight">86</i>&nbsp;    }
+<i class="no-highlight">87</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-04 17:03</div>
+</div>
+</body>
+</html>
