@@ -1,7 +1,7 @@
 package com.kbhkn.valueobjects.base;
 
 /**
- * Confidential or privileged information should be disguised for the client-side, logging, or transaction history.
+ * It should mask confidential or privileged information for the client-side, logging, or transaction history.
  * For example, TR-ID, TAX-ID, SSN, IP Address, Phone Number, Credit-card, etc.
  *
  * @author Hakan KABASAKAL, 4-July-21
