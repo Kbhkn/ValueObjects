@@ -3,8 +3,8 @@ package com.kbhkn.valueobjects.base;
 import java.io.Serializable;
 
 /**
- * A value object is a small and immutable object that represents a simple object whose equality is not based on identity.
- * I.E. two value objects are equal when they have the same value, not necessarily being the same object.
+ * A value object is a small and immutable object representing a simple object whose equality is not based on identity.
+ * I.E., two value objects are equal when they have the same value, not necessarily the same object.
  * VOs can also include/use their business validation while creating themselves.
  * Therefore, VOs should be created using their "static T of()" factory method.
  *
